@@ -95,7 +95,3 @@ class Bybit_requester:
 
         hash = hmac.new(bytes(self.api_secret, "utf-8"), param_str.encode("utf-8"), hashlib.sha256)
         return hash.hexdigest()
-
-
-
-
