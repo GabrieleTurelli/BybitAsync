@@ -27,5 +27,5 @@ async def place_order():
 
 
 if __name__ == "__main__":
-    bybit_requester = Bybit_requester(key, secret)
+    bybit_requester = Bybit_requester("your_api_key", "your_api_secret")
     asyncio.run(fetch_market_data())
