@@ -93,4 +93,3 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## Disclaimer
 This software is provided "as is", without warranty of any kind. Use it at your own risk.
-
