@@ -31,7 +31,7 @@ $ pip install aiohttp
 Import and initialize **Bybit_requester**:
 
 ```python
-from bybit_requester import Bybit_requester
+from bybit_async import Bybit_requester
 
 bybit_requester = Bybit_requester(api_key='your_api_key', api_secret='your_api_secret')
 ```
@@ -53,7 +53,7 @@ async def fetch_market_data():
     print(data)
 
 if __name__ == "__main__":
-    bybit_requester = Bybit_requester(key, secret)
+    bybit_requester = Bybit_requester("your_api_key", "your_api_secret")
     asyncio.run(fetch_market_data())
 ```
 ### Sending Private Requests
@@ -79,7 +79,7 @@ async def place_order():
     print(response)
 
 if __name__ == "__main__":
-    bybit_requester = Bybit_requester(key, secret)
+    bybit_requester = Bybit_requester("your_api_key", "your_api_secret")
     asyncio.run(place_order())
 ```
 ## Bybit API Documentation
