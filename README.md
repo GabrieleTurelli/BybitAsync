@@ -1,70 +1,96 @@
+# Asynchronous Bybit API v5 Connector in Python
+## Introduction
+This Python script contains the Bybit_requester class, designed for asynchronous interactions with the Bybit API v5. It facilitates non-blocking API calls for both public and private endpoints, making it ideal for high-frequency trading bots and other real-time data processing applications.
 
-Certainly! Below is a template for a README.md file for your GitHub repository, tailored to the Python script containing the Bybit_requester class for connecting to the Bybit API v5 asynchronously. This README includes sections like an introduction, installation instructions, usage examples, and more.
+## Features
+- **Asynchronous API Calls**: Utilizes `asyncio` and `aiohttp` for efficient, non-blocking operations.
 
-Asynchronous Bybit API v5 Connector in Python
-Introduction
-This repository hosts a Python script featuring Bybit_requester, a class designed for asynchronous interaction with the Bybit API v5. It provides a straightforward way to send both public and private requests to Bybit's trading platform, facilitating tasks such as market data retrieval and order execution in a non-blocking manner.
+- **Public and Private API Requests**: Easily send requests to both public and private API endpoints.
 
-Features
-Asynchronous API Calls: Utilizes asyncio and aiohttp for efficient, non-blocking API interactions.
-Public and Private API Requests: Supports both public and private endpoint access.
-Signature Generation: Automatic generation of signatures for secure private requests.
-Prerequisites
-Python 3.7 or later.
-aiohttp library.
-Installation
-To get started, clone this repository and install the required dependencies:
+- **signature Generation**: Automatic generation of signatures for authenticated requests.
 
-bash
-Copy code
-git clone https://github.com/your-github-username/bybit-async-connector.git
-cd bybit-async-connector
-pip install aiohttp
-Usage
-Initialization
-First, import and initialize the Bybit_requester:
+## Prerequisites
+- Python 3.7 or later.
+- aiohttp library.
+```bash
+$ pip install aiohttp
+```
 
-python
-Copy code
+## Installation
+Clone this repository and install the required dependencies:
+
+```bash
+$ git clone https://github.com/your-github-username/bybit-async-connector.git
+$ cd bybit-async-connector
+$ pip install aiohttp
+```
+## Usage
+### Initialization
+
+
+Import and initialize **Bybit_requester**:
+
+```python
 from bybit_requester import Bybit_requester
 
-bybit_requester = Bybit_requester(api_key='your_api_key', api_secret='your_api_secret', testnet=True)
-Sending Public Requests
-Example of fetching public market data:
+bybit_requester = Bybit_requester(api_key='your_api_key', api_secret='your_api_secret')
+```
 
-python
-Copy code
+### Sending Public Requests
+
+Fetch public market data:
+
+```python
 import asyncio
+from bybit_async import Bybit_requester
+
 
 async def fetch_market_data():
-    data = await bybit_requester.send_public_request(endpoint='/v2/public/tickers', params={'symbol': 'BTCUSD'})
+    data = await bybit_requester.send_public_request(endpoint='/v5/market/kline', 
+                                                     params={'category':'linear',
+                                                             'symbol': 'BTCUSDT',
+                                                             'interval':'D'})
     print(data)
 
-asyncio.run(fetch_market_data())
-Sending Private Requests
-Example of placing an order:
+if __name__ == "__main__":
+    bybit_requester = Bybit_requester(key, secret)
+    asyncio.run(fetch_market_data())
+```
+### Sending Private Requests
+Place an order:
 
-python
-Copy code
+```python
+import asyncio
+from bybit_async import Bybit_requester
+
+
 async def place_order():
     order_data = {
-        'symbol': 'BTCUSD',
-        'order_type': 'Limit',
-        'qty': 1,
-        # Additional order parameters...
+        'category': 'linear',
+        'symbol': 'BTCUSDT',
+        'orderType': 'Market',
+        'side': 'Buy',
+        'qty': '0.001',
+        'positionIdx': 1
     }
-    response = await bybit_requester.send_signed_request(method='POST', endpoint='/private/order/create', params=order_data)
+    response = await bybit_requester.send_signed_request(method='POST',
+                                                         endpoint='/v5/order/create',
+                                                         params=order_data)
     print(response)
 
-asyncio.run(place_order())
-Documentation
-For more detailed information on the class methods and their usage, please refer to the bybit_requester.py file in this repository.
+if __name__ == "__main__":
+    bybit_requester = Bybit_requester(key, secret)
+    asyncio.run(place_order())
+```
+## Bybit API Documentation
+For information on available endpoints and their parameters, refer to the [Bybit API Documentation](https://bybit-exchange.github.io/docs/v5/intro).
 
-Contributing
-Contributions to improve the script or add new features are always welcome. Please fork this repository and submit a pull request with your changes.
+## Contributing
+Contributions are welcome! Please fork this repository and submit a pull request with your changes.
 
-License
+## License
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-Disclaimer
+## Disclaimer
 This software is provided "as is", without warranty of any kind. Use it at your own risk.
+
