@@ -20,7 +20,7 @@ $ pip install aiohttp
 Clone this repository and install the required dependencies:
 
 ```bash
-$ git clone https://github.com/your-github-username/bybit-async-connector.git
+$ git clone https://github.com/GabrieleTurelli/BybitAsync.git
 $ cd bybit-async-connector
 $ pip install aiohttp
 ```
